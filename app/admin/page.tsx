@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentProfile } from "@/lib/auth";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { createAdminClient, hasServiceRoleKey } from "@/lib/supabase/admin";
 import AddUserForm from "./AddUserForm";
 import UserRow from "./UserRow";
 
@@ -11,6 +11,18 @@ export default async function AdminPage() {
   const me = await getCurrentProfile();
   // Non-admins get a plain "not found", as if the page didn't exist.
   if (me?.role !== "admin") notFound();
+
+  if (!hasServiceRoleKey()) {
+    return (
+      <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
+        <h1 className="mb-2 text-2xl font-bold">Admin</h1>
+        <p className="text-muted">
+          The admin page needs SUPABASE_SERVICE_ROLE_KEY in .env.local. See &quot;Full setup&quot;
+          in the README.
+        </p>
+      </main>
+    );
+  }
 
   const { data: users, error } = await createAdminClient()
     .from("profiles")

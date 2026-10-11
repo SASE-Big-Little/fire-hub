@@ -10,11 +10,20 @@ import "server-only";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "./types";
 
+/**
+ * True when the service role key is set. Production always has it. Members
+ * running the "quick setup" locally don't, so features that need it
+ * (Ask the Hub, the admin page, the sign-in attempt limit) can check first.
+ */
+export function hasServiceRoleKey(): boolean {
+  return Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY);
+}
+
 export function createAdminClient() {
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!key) {
     throw new Error(
-      "SUPABASE_SERVICE_ROLE_KEY is not set. Only mentors need it (admin page, Ask the Hub).",
+      "SUPABASE_SERVICE_ROLE_KEY is not set. See \"Full setup\" in the README.",
     );
   }
 

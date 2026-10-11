@@ -2,7 +2,7 @@
 // Signed-in members only. 10 questions per hour each.
 import { NextResponse } from "next/server";
 import { requireMember } from "@/lib/auth";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { createAdminClient, hasServiceRoleKey } from "@/lib/supabase/admin";
 import { askModel, AIRateLimitError } from "@/lib/ai";
 import { answerQuestion, MAX_CHUNKS, MAX_QUESTION_LENGTH } from "@/lib/ask";
 import { ASK_LIMIT, checkAskLimit, recordQuestion } from "@/lib/rate-limit";
@@ -20,6 +20,13 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { error: `Please keep questions under ${MAX_QUESTION_LENGTH} characters.` },
       { status: 400 },
+    );
+  }
+
+  if (!hasServiceRoleKey()) {
+    return NextResponse.json(
+      { error: 'Ask the Hub needs SUPABASE_SERVICE_ROLE_KEY. See "Full setup" in the README.' },
+      { status: 503 },
     );
   }
 

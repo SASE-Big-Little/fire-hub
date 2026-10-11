@@ -70,6 +70,31 @@ npm run build      # does the whole site build?
 
 GitHub runs the same four checks on every pull request.
 
+### What works in this quick setup
+
+Signing in, the resource library, submitting resources, and games all work.
+**Ask the Hub and the admin page don't**, because they need the server's secret
+key, which only lives in Vercel and on mentors' computers. Most challenges don't
+need them. If yours does (challenges 9 to 23), do the full setup below.
+
+### Full setup: your own practice database (another ~15 minutes)
+
+Use this for challenges that touch Ask the Hub or the admin page. You get your
+own free Supabase project, where you're the admin, so you can't break the real one.
+
+1. Create a free account at [supabase.com](https://supabase.com) and a new project.
+   The free plan is enough; don't add a payment method.
+2. In your project, open **SQL Editor**. Paste and run each file in
+   `supabase/migrations/`, oldest first.
+3. Go to **Authentication → Sign In / Providers**: turn **off** "Allow new users to sign up"
+   and "Confirm email", and set the minimum password length to 8.
+4. From **Project Settings → API Keys**, copy the URL, the publishable key, and the
+   **secret / service_role** key into your `.env.local`.
+   The service role key is a secret: never commit it, paste it, or screenshot it.
+5. Create your admin account: `npm run create-admin`
+6. `npm run dev`, sign in, and add a few resources from the admin page to test with.
+   Keep `AI_PROVIDER=mock` unless a mentor gives you a Groq key to try.
+
 ### Stuck?
 
 - `command not found: npm`: install Node.js, then open a new terminal.

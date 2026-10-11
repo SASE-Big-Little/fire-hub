@@ -14,6 +14,7 @@ export default function SignInForm() {
         <span className="text-sm text-muted">Username</span>
         <input
           name="username"
+          defaultValue={state.username}
           autoComplete="username"
           autoCapitalize="none"
           required
