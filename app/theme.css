@@ -1,0 +1,46 @@
+/*
+  Fire Hub theme: THE one place for colors.
+
+  Change a color here and it changes everywhere. In components, use the
+  Tailwind names on the right, for example:
+    bg-background  text-foreground  text-muted  bg-surface
+    border-border  bg-accent  text-highlight
+
+  Dark is the default. A light version is ready below for anyone building
+  a theme toggle (challenge 2): set data-theme="light" on <html>.
+*/
+
+:root {
+  /* Fire palette */
+  --ember: #e8590c; /* accent: buttons, links, focus */
+  --flame-gold: #f59f00; /* highlights */
+  --charcoal: #1c1917; /* page background */
+  --ash: #a8a29e; /* secondary text */
+  --cream: #fff4e6; /* main text on dark */
+
+  /* Roles: what each color is used for */
+  --background: var(--charcoal);
+  --surface: #292524; /* cards, inputs: a bit lighter than the background */
+  --border: #44403c;
+  --foreground: var(--cream);
+  --muted: var(--ash);
+  --accent: var(--ember);
+  --accent-foreground: #ffffff;
+  --highlight: var(--flame-gold);
+  --danger: #f87171;
+  --success: #4ade80;
+
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --background: #fff8f0;
+  --surface: #ffffff;
+  --border: #e7e5e4;
+  --foreground: var(--charcoal);
+  --muted: #57534e;
+  --danger: #dc2626;
+  --success: #16a34a;
+
+  color-scheme: light;
+}
