@@ -24,3 +24,28 @@ body {
 a {
   color: var(--accent);
 }
+
+/*
+  Small shared styles, so pages stay short.
+  Use them like any class: <button className="btn-primary">.
+*/
+@layer components {
+  .card {
+    @apply rounded-xl border border-border bg-surface p-6;
+  }
+  .input {
+    @apply rounded-md border border-border bg-background px-3 py-2 text-foreground outline-none focus:border-accent;
+  }
+  .btn-primary {
+    @apply rounded-md bg-accent px-4 py-2 font-semibold text-accent-foreground hover:brightness-110 disabled:opacity-50;
+  }
+  .btn-secondary {
+    @apply rounded-md border border-border px-3 py-1.5 text-sm text-foreground hover:border-accent disabled:opacity-50;
+  }
+  .btn-danger {
+    @apply rounded-md border border-danger px-3 py-1.5 text-sm text-danger hover:bg-danger hover:text-background disabled:opacity-50;
+  }
+  .tag {
+    @apply rounded-full bg-background px-2 py-0.5 text-xs text-highlight;
+  }
+}
