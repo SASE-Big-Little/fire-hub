@@ -165,3 +165,4 @@ Status to "In progress". Starter challenges are a great first PR.
 | 21 | Run a small model in the browser (WebLLM) as a fallback when the shared quota runs out | Stretch | On-device AI | | Open |
 | 22 | Generate quiz questions from an approved resource with the model | Stretch | Structured output | | Open |
 | 23 | Run the evaluation set in CI against a mock model | Stretch | Testing, CI | | Open |
+| 24 | **Public showcase:** let signed-out visitors see `/games` and a new `/showcase` page listing what members built (opt-in names, GitHub links, the PR that added it). Everything else stays members-only. See [docs/challenge-24-showcase.md](docs/challenge-24-showcase.md) | Intermediate | Routing, auth, privacy | | Open |
